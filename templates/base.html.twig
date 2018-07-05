@@ -49,15 +49,23 @@
                             <img class="nav-profile-img rounded-circle" src="/images/runner.png">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Perfil</a>
+                            {# <a class="dropdown-item" href="#">Perfil</a>
                             <a class="dropdown-item" href="#">Crear Post</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="#">Logout</a> #}
+                            {% if is_granted( 'IS_AUTHENTICATED_FULL Y') %}
+                                <a class = "dropdown-item" href= "#"?{{ app.user.username}}</a>
+                            {% endif %}
+                            {%  if is_granted( 'IS_AUTHENTICATED_FULLY') %}
+                                <a class = "dropdown-item" href= "/admin/logout" >Logout</a>
+                            {%  else %}
+                                <a class = "dropdown-item" href= "/admin/login" >Login</a>
+                            {% endif %}
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
-        <!-- AÑADIR TEXTO EN EL CUERPO DE NUESTRA PÁGINA -->
+        <!-- AÑADIR TEXTO EN EL CUERPO DE NUESTRA pAGINA -->
         {% block body %}
             <div class="container text-center">
                 <h1 class="text-muted">{{ texto }}</h1>
