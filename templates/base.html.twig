@@ -7,7 +7,7 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
             integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-            <!-- AÃADIR CSS DEL PROYECTO -->
+            <!-- AÑADIR CSS DEL PROYECTO -->
             <link rel="stylesheet" href="/css/font-awesome.css">
             <link rel="stylesheet" href="/css/styles.css">
         {% endblock %}
@@ -49,16 +49,16 @@
                             <img class="nav-profile-img rounded-circle" src="/images/runner.png">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            {# <a class="dropdown-item" href="#">Perfil</a>
-                            <a class="dropdown-item" href="#">Crear Post</a>
-                            <a class="dropdown-item" href="#">Logout</a> #}
                             {% if is_granted( 'IS_AUTHENTICATED_FULL Y') %}
-                                <a class = "dropdown-item" href= "#"?{{ app.user.username}}</a>
+                                <a class = "dropdown-item" href= "#">{{ app.user.username}}</a>
                             {% endif %}
-                            {%  if is_granted( 'IS_AUTHENTICATED_FULLY') %}
-                                <a class = "dropdown-item" href= "/admin/logout" >Logout</a>
-                            {%  else %}
-                                <a class = "dropdown-item" href= "/admin/login" >Login</a>
+                            <a class="dropdown-item" href="#">{{ 'Perfil'|trans }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Crear Noticia'|trans }}</a>
+                            {# <a class="dropdown-item" href="#">Logout</a> #}
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <a class="dropdown-item" href="/admin/logout">{{ 'LogOut'| trans }}</a>
+                            {% else %}
+                                <a class="dropdown-item" href="/admin/login">{{ 'LogIn'| trans }}</a>
                             {% endif %}
                         </div>
                     </li>
@@ -68,7 +68,12 @@
         <!-- AÑADIR TEXTO EN EL CUERPO DE NUESTRA pAGINA -->
         {% block body %}
             <div class="container text-center">
-                <h1 class="text-muted">{{ texto }}</h1>
+                <h1 class="text-muted"> {{ texto | trans }}
+                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {{'Bienvenido' | trans}} {{ app.user.username}}
+                {% endif %}
+            </h1>
+
             </div>
         {% endblock %}
         <footer class="footer">

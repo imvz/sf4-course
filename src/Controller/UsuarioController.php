@@ -46,4 +46,14 @@ class UsuarioController extends Controller
         $em->flush();
         return new Response( "Usuario guardado!" );
     }
+
+    /**
+     * @Route("/admin/login_check", name="login_check")
+     */
+    public function loginCheck()
+    {
+        return $this->render("base.html.twig",[
+        'texto'=>'a'
+    ]);
+    }
 }
